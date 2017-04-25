@@ -50,6 +50,7 @@
 }
 
 - (void)getPastPedometerDataSince:(int)days {
+    [self.pastPedometer removeAllObjects];
     
     dispatch_group_t group = dispatch_group_create();
     for (int i = 0; i <= days; i++) {

@@ -11,6 +11,12 @@
 
 @interface FitnessCell : UICollectionViewCell
 
-- (void)updateCellWithPedometerData:(CMPedometerData*)PedometerData withViewMode:(BOOL)isDetailMode;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *floorsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *averagePace;
+
+- (void)updateCellWithPedometerData:(CMPedometerData*)pedometerData withViewMode:(BOOL)isDetailMode;
 
 @end

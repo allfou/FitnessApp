@@ -41,8 +41,8 @@
 
 @implementation FitnessViewController
 
-static NSString * const listCellID = @"listCell";
-static NSString * const detailCellID = @"detailCell";
+static NSString * const listCellID = @"ListFitnessCell";
+static NSString * const detailCellID = @"DetailFitnessCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,16 +73,15 @@ static NSString * const detailCellID = @"detailCell";
     // Init CollectionView
     self.isDetailMode = NO; // Set List Mode by default
     [self setCollectionMode];
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0); // unhide last cell from tabbar
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0); // unhide last cell from tabbar
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
     
     // Init Current Date Label
     [self.currentDateLabel setText:[NSString stringWithFormat:@"Today, %@", [self getCurrentTime]]];
     
-    // Init Current Pedometer Data
-    [[PedometerService sharedManager]startTracking];
-    
-    // Init Past Pedometer Data
-    [[PedometerService sharedManager]getPastPedometerDataSince:9];
+    // Init Data
+    [self initData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,6 +93,18 @@ static NSString * const detailCellID = @"detailCell";
     
     // Bug with refreshcontrol being position above cells
     [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
+}
+
+// ************************************************************************************************************
+
+#pragma mark Data
+
+- (void)initData {
+    // Init Current Pedometer Data
+    [[PedometerService sharedManager]startTracking];
+    
+    // Init Past Pedometer Data from the last N days
+    [[PedometerService sharedManager]getPastPedometerDataSince:9];
 }
 
 // ************************************************************************************************************
@@ -148,6 +159,12 @@ static NSString * const detailCellID = @"detailCell";
     // Set Pedometer Info
     [cell updateCellWithPedometerData:self.pastPedometers[indexPath.row] withViewMode:self.isDetailMode];
     
+    // Set Cell Color
+    if(indexPath.row % 2 == 0)
+        cell.backgroundColor = cellBackgroundColorLight;
+    else
+        cell.backgroundColor = cellBackgroundColorDark;
+    
     return cell;
 }
 
@@ -190,10 +207,10 @@ static NSString * const detailCellID = @"detailCell";
             CGSize mElementSize;
             [self.collectionView.collectionViewLayout invalidateLayout];
             width = self.collectionView.frame.size.width / 1;
-            mElementSize = CGSizeMake(width, 155);
+            mElementSize = CGSizeMake(width, 90);
             flowLayout = [[UICollectionViewFlowLayout alloc] init];
             [flowLayout setItemSize:mElementSize];
-            flowLayout.minimumLineSpacing = 10.0f;
+            flowLayout.minimumLineSpacing = 0.0f;
             flowLayout.minimumInteritemSpacing = 0.0f;
             flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
             [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
@@ -251,7 +268,7 @@ static NSString * const detailCellID = @"detailCell";
     [self containingScrollViewDidEndDragging:scrollView];
     
     if (self.isRefreshing) {
-        // Init Data here
+        [self initData];
     }
 }
 

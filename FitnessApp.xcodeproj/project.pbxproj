@@ -22,6 +22,8 @@
 		F59FAC221EAED88F0094D3A9 /* FitnessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC211EAED88F0094D3A9 /* FitnessCell.m */; };
 		F59FAC2C1EAEEA430094D3A9 /* FitnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC2B1EAEEA430094D3A9 /* FitnessViewController.m */; };
 		F59FAC5D1EAF0A580094D3A9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC5C1EAF0A580094D3A9 /* SettingsViewController.m */; };
+		F59FAC5F1EAF16400094D3A9 /* ListFitnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59FAC5E1EAF16400094D3A9 /* ListFitnessCell.xib */; };
+		F59FAC611EAF164D0094D3A9 /* DetailFitnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59FAC601EAF164D0094D3A9 /* DetailFitnessCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		F59FAC2B1EAEEA430094D3A9 /* FitnessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FitnessViewController.m; sourceTree = "<group>"; };
 		F59FAC5B1EAF0A580094D3A9 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F59FAC5C1EAF0A580094D3A9 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		F59FAC5E1EAF16400094D3A9 /* ListFitnessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListFitnessCell.xib; sourceTree = "<group>"; };
+		F59FAC601EAF164D0094D3A9 /* DetailFitnessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailFitnessCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,8 @@
 			children = (
 				F59FAC201EAED88F0094D3A9 /* FitnessCell.h */,
 				F59FAC211EAED88F0094D3A9 /* FitnessCell.m */,
+				F59FAC5E1EAF16400094D3A9 /* ListFitnessCell.xib */,
+				F59FAC601EAF164D0094D3A9 /* DetailFitnessCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -339,6 +345,8 @@
 				F52BD4D31EAEB059001A8276 /* Fitness.storyboard in Resources */,
 				F52BD4A61EAEAD08001A8276 /* Assets.xcassets in Resources */,
 				F52BD4A41EAEAD08001A8276 /* Main.storyboard in Resources */,
+				F59FAC611EAF164D0094D3A9 /* DetailFitnessCell.xib in Resources */,
+				F59FAC5F1EAF16400094D3A9 /* ListFitnessCell.xib in Resources */,
 				F52BD4D51EAEB061001A8276 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

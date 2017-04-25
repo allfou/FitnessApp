@@ -72,6 +72,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" red="0.10428311699999999" green="0.20044176750000001" blue="0.29612151019999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -100,6 +101,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" red="0.19369706501670506" green="0.37914732510590382" blue="0.56018004441624369" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -113,6 +115,9 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Settings" id="VbQ-qn-QHL"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="versionDetail" destination="SYF-Sl-lmZ" id="pLP-xP-73F"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLy-Dh-p58" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
