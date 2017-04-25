@@ -1,5 +1,5 @@
 //
-//  SettingsController.h
+//  SettingsViewController.h
 //  FitnessApp
 //
 //  Created by Fouad Allaoui on 4/24/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsController : UIViewController
+@interface SettingsViewController : UITableViewController
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "FitnessViewController.h"
-#import "PedometerData.h"
+#import "PedometerService.h"
 #import "FitnessCell.h"
 #import "Theme.h"
 
@@ -19,10 +19,21 @@
 
 @interface FitnessViewController ()
 
+// Current Pedometer View
+@property (weak, nonatomic) IBOutlet UILabel *currentDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *floorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+
+// Other UI Components
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) UIRefreshControl *refreshControl;
 @property UIBarButtonItem *switchViewModeButton;
-@property (nonatomic) NSArray *pedometers;
 @property UIImageView *logo;
+
+// Data
+@property (nonatomic) CMPedometerData *currentPedometer;
+@property (nonatomic) NSArray *pedometers;
 @property BOOL isDetailMode;
 @property BOOL isRefreshing;
 
@@ -37,7 +48,8 @@ static NSString * const detailCellID = @"detailCell";
     [super viewDidLoad];
     
     // Init Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPedometerList:) name:@"refreshPedometerMessageEvent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCurrentPedometerData:) name:@"refreshCurrentPedometerMessageEvent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPastPedometerData:) name:@"refreshPastPedometerMessageEvent" object:nil];
     
     // Used for double tap on tabbar items
     self.tabBarController.delegate = self;
@@ -63,6 +75,11 @@ static NSString * const detailCellID = @"detailCell";
     [self setCollectionMode];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0); // unhide last cell from tabbar
     
+    // Init Current Date Label
+    [self.currentDateLabel setText:[NSString stringWithFormat:@"Today, %@", [self getCurrentTime]]];
+    
+    // Init Location Service
+    [[PedometerService sharedManager]startTracking];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,7 +97,18 @@ static NSString * const detailCellID = @"detailCell";
 
 #pragma mark Notifications
 
-- (void)refreshPedometerList:(NSNotification*)notification {
+- (void)refreshCurrentPedometerData:(NSNotification*)notification {
+    self.currentPedometer = [notification object];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.currentDateLabel setText:[NSString stringWithFormat:@"Today, %@", [self getCurrentTime]]];
+        [self.stepsLabel setText:[NSString stringWithFormat:@"%@", self.currentPedometer.numberOfSteps]];
+        [self.floorLabel setText:[NSString stringWithFormat:@"%@", [NSNumber numberWithFloat:([self.currentPedometer.floorsAscended floatValue] + [self.currentPedometer.floorsDescended floatValue])]]];
+        [self.distanceLabel setText:[NSString stringWithFormat:@"%.2f", [self convertMetersToMiles:self.currentPedometer.distance]]];
+    });
+}
+
+- (void)refreshPastPedometerData:(NSNotification*)notification {
     self.pedometers = [notification object];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -193,6 +221,11 @@ static NSString * const detailCellID = @"detailCell";
     }
 }
 
+- (void)setNavigationLogoImage:(NSString*)imageName {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.logo.image = [UIImage imageNamed:imageName];
+    });
+}
 
 //*****************************************************************************************************************************************
 
@@ -230,13 +263,55 @@ static NSString * const detailCellID = @"detailCell";
     [self containingScrollViewDidEndDragging:scrollView];
 }
 
-//*****************************************************************************************************************************************
 
-- (void)setNavigationLogoImage:(NSString*)imageName {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.logo.image = [UIImage imageNamed:imageName];
-    });
+//***************************************************************************************************************************************
+
+#pragma mark - Tab bar Delegate
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    static UIViewController *previousController;
+    previousController = previousController ?: viewController;
+    if (previousController == viewController) {
+        if ([viewController isKindOfClass:UINavigationController.class]) {
+            UINavigationController *navigationController = (UINavigationController *)viewController;
+            if (navigationController.viewControllers.count == 1) {
+                UIViewController *rootViewController = navigationController.viewControllers.firstObject;
+                if ([rootViewController respondsToSelector:@selector(scrollToTop)]) {
+                    [rootViewController scrollToTop];
+                }
+            }
+        } else {
+            if ([viewController respondsToSelector:@selector(scrollToTop)]) {
+                [viewController scrollToTop];
+            }
+        }
+    }
+    previousController = viewController;
+    return YES;
 }
+
+-(void)scrollToTop {
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                atScrollPosition:UICollectionViewScrollPositionTop
+                                        animated:YES];
+}
+
+// ****************************************************************************************************************
+
+#pragma mark - Util
+
+- (double)convertMetersToMiles:(NSNumber*)meters {
+    return [meters doubleValue] * 0.000621371192;
+}
+
+- (NSString*)getCurrentTime {
+   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+   [formatter setDateFormat:@"HH:mm"];
+   NSDate *currentDate = [NSDate date];
+
+   return [formatter stringFromDate:currentDate];
+}
+   
 
 
 @end

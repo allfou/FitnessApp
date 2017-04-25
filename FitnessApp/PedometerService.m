@@ -38,7 +38,16 @@
     return self;
 }
 
-- (PedometerData*)getPedometerDataForDate:(NSDate*)date {
+- (void)startTracking {
+    [self.pedometer startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData *_Nullable pedometerData, NSError *_Nullable error) {
+        NSLog(@"PedometerData = %@", pedometerData);
+        
+        // Post Refresh Notification to Restaurant View Controller
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCurrentPedometerMessageEvent" object:pedometerData];
+    }];
+}
+
+- (CMPedometerData*)getPedometerDataForDate:(NSDate*)date {
     return nil;
 }
 

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PedometerData.h"
+#import <CoreMotion/CoreMotion.h>
 
 @interface FitnessCell : UICollectionViewCell
 
-- (void)updateCellWithPedometerData:(PedometerData*)PedometerData withViewMode:(BOOL)isDetailMode;
+- (void)updateCellWithPedometerData:(CMPedometerData*)PedometerData withViewMode:(BOOL)isDetailMode;
 
 @end

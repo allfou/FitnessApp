@@ -10,7 +10,7 @@
 
 @implementation FitnessCell
 
-- (void)updateCellWithPedometerData:(PedometerData*)PedometerData withViewMode:(BOOL)isDetailMode {
+- (void)updateCellWithPedometerData:(CMPedometerData*)PedometerData withViewMode:(BOOL)isDetailMode {
     
 }
 

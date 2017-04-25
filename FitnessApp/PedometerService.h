@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMotion/CoreMotion.h>
-#import "PedometerData.h"
 
 @interface PedometerService : NSObject
 
 + (instancetype)sharedManager;
 
-- (PedometerData*)getPedometerDataForDate:(NSDate*)date;
+- (void)startTracking;
+
+- (CMPedometerData*)getPedometerDataForDate:(NSDate*)date;
 
 @end
