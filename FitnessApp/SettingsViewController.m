@@ -10,12 +10,12 @@
 
 @interface SettingsViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *settings1Detail;
-@property (weak, nonatomic) IBOutlet UILabel *settings2Detail;
+@property (weak, nonatomic) IBOutlet UILabel *metricDetail;
+@property (weak, nonatomic) IBOutlet UILabel *viewModeDetail;
 @property (weak, nonatomic) IBOutlet UILabel *versionDetail;
 
-@property NSString *selectedFood;
-@property NSString *selectedSortedBy;
+@property NSString *selectedMetric;
+@property NSString *selectedViewMode;
 
 @end
 
@@ -33,11 +33,11 @@
     [super viewWillAppear:NO];
     
     // Init default settings from NSUserDefaults
-    self.selectedFood = [[NSUserDefaults standardUserDefaults] stringForKey:@"settings1"];
-    self.selectedSortedBy = [[NSUserDefaults standardUserDefaults] stringForKey:@"settings2"];
+    self.selectedMetric = [[NSUserDefaults standardUserDefaults] stringForKey:@"selectedMetric"];
+    self.selectedViewMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"selectedViewMode"];
     
-    self.settings1Detail.text = self.selectedFood;
-    self.settings2Detail.text = self.selectedSortedBy;
+    self.metricDetail.text = self.selectedMetric;
+    self.viewModeDetail.text = self.selectedViewMode;
 }
 
 - (void)didReceiveMemoryWarning {

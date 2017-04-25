@@ -24,6 +24,9 @@
 		F59FAC5D1EAF0A580094D3A9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC5C1EAF0A580094D3A9 /* SettingsViewController.m */; };
 		F59FAC5F1EAF16400094D3A9 /* ListFitnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59FAC5E1EAF16400094D3A9 /* ListFitnessCell.xib */; };
 		F59FAC611EAF164D0094D3A9 /* DetailFitnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59FAC601EAF164D0094D3A9 /* DetailFitnessCell.xib */; };
+		F59FAC641EAFA1C50094D3A9 /* MetricsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC631EAFA1C50094D3A9 /* MetricsViewController.m */; };
+		F59FAC661EAFA23D0094D3A9 /* DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = F59FAC651EAFA23D0094D3A9 /* DefaultPreferences.plist */; };
+		F59FAC691EAFA7290094D3A9 /* ViewModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC681EAFA7290094D3A9 /* ViewModeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,11 @@
 		F59FAC5C1EAF0A580094D3A9 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		F59FAC5E1EAF16400094D3A9 /* ListFitnessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListFitnessCell.xib; sourceTree = "<group>"; };
 		F59FAC601EAF164D0094D3A9 /* DetailFitnessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailFitnessCell.xib; sourceTree = "<group>"; };
+		F59FAC621EAFA1C50094D3A9 /* MetricsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsViewController.h; sourceTree = "<group>"; };
+		F59FAC631EAFA1C50094D3A9 /* MetricsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsViewController.m; sourceTree = "<group>"; };
+		F59FAC651EAFA23D0094D3A9 /* DefaultPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultPreferences.plist; sourceTree = "<group>"; };
+		F59FAC671EAFA7290094D3A9 /* ViewModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewModeViewController.h; sourceTree = "<group>"; };
+		F59FAC681EAFA7290094D3A9 /* ViewModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewModeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 				F52BD4A51EAEAD08001A8276 /* Assets.xcassets */,
 				F52BD4A71EAEAD08001A8276 /* LaunchScreen.storyboard */,
 				F52BD4AA1EAEAD08001A8276 /* Info.plist */,
+				F59FAC651EAFA23D0094D3A9 /* DefaultPreferences.plist */,
 				F52BD4991EAEAD08001A8276 /* Supporting Files */,
 			);
 			path = FitnessApp;
@@ -210,6 +219,10 @@
 			children = (
 				F59FAC5B1EAF0A580094D3A9 /* SettingsViewController.h */,
 				F59FAC5C1EAF0A580094D3A9 /* SettingsViewController.m */,
+				F59FAC621EAFA1C50094D3A9 /* MetricsViewController.h */,
+				F59FAC631EAFA1C50094D3A9 /* MetricsViewController.m */,
+				F59FAC671EAFA7290094D3A9 /* ViewModeViewController.h */,
+				F59FAC681EAFA7290094D3A9 /* ViewModeViewController.m */,
 				F52BD4D41EAEB061001A8276 /* Settings.storyboard */,
 			);
 			name = Settings;
@@ -348,6 +361,7 @@
 				F59FAC611EAF164D0094D3A9 /* DetailFitnessCell.xib in Resources */,
 				F59FAC5F1EAF16400094D3A9 /* ListFitnessCell.xib in Resources */,
 				F52BD4D51EAEB061001A8276 /* Settings.storyboard in Resources */,
+				F59FAC661EAFA23D0094D3A9 /* DefaultPreferences.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +386,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F59FAC691EAFA7290094D3A9 /* ViewModeViewController.m in Sources */,
+				F59FAC641EAFA1C50094D3A9 /* MetricsViewController.m in Sources */,
 				F52BD49E1EAEAD08001A8276 /* AppDelegate.m in Sources */,
 				F52BD49B1EAEAD08001A8276 /* main.m in Sources */,
 				F59FAC151EAECF300094D3A9 /* PedometerService.m in Sources */,

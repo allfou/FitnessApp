@@ -27,7 +27,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday 21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnT-mT-yww">
                                         <rect key="frame" x="0.0" y="0.0" width="464" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
-                                        <color key="textColor" red="1" green="0.95079187813186805" blue="0.79665090024340679" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" red="1" green="0.60436288400000004" blue="0.32116080920000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.25971929881477052" green="0.39465817480238768" blue="0.51608105970050766" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
                                 </subviews>
@@ -96,10 +96,10 @@
                                         <rect key="frame" x="309.5" y="0.0" width="154.5" height="49"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9S-wY-ZCw">
-                                                <rect key="frame" x="0.0" y="0.0" width="81.5" height="33.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="54.5" height="33.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.32mi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVQ-qJ-Zbc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="33.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.32" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVQ-qJ-Zbc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="54.5" height="33.5"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="28"/>
                                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -107,10 +107,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNA-wv-lMs">
-                                                <rect key="frame" x="0.0" y="33.5" width="47.5" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="33.5" width="70" height="15.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Siy-Jj-csq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="47.5" height="15.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance (mi)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Siy-Jj-csq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
                                                         <color key="textColor" red="0.7562017057" green="0.75254855740000004" blue="0.75985485409999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
@@ -144,7 +144,8 @@
             <size key="customSize" width="488" height="102"/>
             <connections>
                 <outlet property="dateLabel" destination="AnT-mT-yww" id="Bep-kW-6hM"/>
-                <outlet property="distanceLabel" destination="fVQ-qJ-Zbc" id="dly-BJ-00L"/>
+                <outlet property="distanceLabel" destination="fVQ-qJ-Zbc" id="Za0-Vu-ELc"/>
+                <outlet property="distanceMetricLabel" destination="Siy-Jj-csq" id="JZL-VZ-ZDW"/>
                 <outlet property="floorsLabel" destination="7GU-wP-pmX" id="yXm-Sa-iNv"/>
                 <outlet property="stepsLabel" destination="J5z-Qy-QY1" id="sOP-hF-3iU"/>
             </connections>

@@ -16,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *floorsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePace;
+@property (weak, nonatomic) IBOutlet UILabel *distanceMetricLabel;
 
-- (void)updateCellWithPedometerData:(CMPedometerData*)pedometerData withViewMode:(BOOL)isDetailMode;
+- (void)updateCellWithPedometerData:(CMPedometerData*)pedometerData withViewMode:(NSString*)viewMode;
 
 @end

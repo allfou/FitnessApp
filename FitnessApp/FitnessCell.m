@@ -20,19 +20,26 @@
     // Reset values for reusable cell
 }
 
-- (void)updateCellWithPedometerData:(CMPedometerData*)pedometerData withViewMode:(BOOL)isDetailMode {
+- (void)updateCellWithPedometerData:(CMPedometerData*)pedometerData withViewMode:(NSString*)viewMode {
     [self.dateLabel setText:[NSString stringWithFormat:@"%@", [self getPastDate:pedometerData.startDate]]];
     [self.stepsLabel setText:[NSString stringWithFormat:@"%@", pedometerData.numberOfSteps]];
     [self.floorsLabel setText:[NSString stringWithFormat:@"%@", [NSNumber numberWithFloat:([pedometerData.floorsAscended floatValue] + [pedometerData.floorsDescended floatValue])]]];
-    [self.distanceLabel setText:[NSString stringWithFormat:@"%.2f", [self convertMetersToMiles:pedometerData.distance]]];
+    [self.distanceLabel setText:[self convertToSelectedMetric:pedometerData.distance]];
 }
 
 // ****************************************************************************************************************
 
 #pragma mark - Util
 
-- (double)convertMetersToMiles:(NSNumber*)meters {
-    return [meters doubleValue] * 0.000621371192;
+- (NSString*)convertToSelectedMetric:(NSNumber*)value {
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"selectedMetric"] isEqualToString:@"Miles"]) {
+        [self.distanceMetricLabel setText:@"Distance - mi"];
+        return [NSString stringWithFormat:@"%.2f", [value doubleValue] * 0.000621371192];
+    }
+    
+    // return value in km
+    [self.distanceMetricLabel setText:@"Distance - km"];
+    return [NSString stringWithFormat:@"%.2f", [value doubleValue] / 1000];
 }
 
 - (NSString*)getPastDate:(NSDate*)date {

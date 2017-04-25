@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *floorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *metricLabel;
 
 // Other UI Components
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -34,7 +35,7 @@
 // Data
 @property (nonatomic) CMPedometerData *currentPedometer;
 @property (nonatomic) NSArray *pastPedometers;
-@property BOOL isDetailMode;
+@property NSString *viewMode;
 @property BOOL isRefreshing;
 
 @end
@@ -50,6 +51,7 @@ static NSString * const detailCellID = @"DetailFitnessCell";
     // Init Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCurrentPedometerData:) name:@"refreshCurrentPedometerMessageEvent" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPastPedometerData:) name:@"refreshPastPedometerMessageEvent" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initData) name:@"refreshAllDataMessageEvent" object:nil];
     
     // Used for double tap on tabbar items
     self.tabBarController.delegate = self;
@@ -71,8 +73,6 @@ static NSString * const detailCellID = @"DetailFitnessCell";
     self.isRefreshing = NO;
     
     // Init CollectionView
-    self.isDetailMode = NO; // Set List Mode by default
-    [self setCollectionMode];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0); // unhide last cell from tabbar
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -86,6 +86,13 @@ static NSString * const detailCellID = @"DetailFitnessCell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setCurrentMetric];
+    self.viewMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"selectedViewMode"];
+    [self setCollectionMode];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -146,10 +153,10 @@ static NSString * const detailCellID = @"DetailFitnessCell";
     
     FitnessCell *cell;
     
-    if (self.isDetailMode) {
-        cell = (FitnessCell*) [collectionView dequeueReusableCellWithReuseIdentifier:detailCellID forIndexPath:indexPath];
-    } else {
+    if ([self.viewMode isEqualToString:@"List"]) {
         cell = (FitnessCell*) [collectionView dequeueReusableCellWithReuseIdentifier:listCellID forIndexPath:indexPath];
+    } else {
+        cell = (FitnessCell*) [collectionView dequeueReusableCellWithReuseIdentifier:detailCellID forIndexPath:indexPath];
     }
     
     if (!cell) {
@@ -157,7 +164,7 @@ static NSString * const detailCellID = @"DetailFitnessCell";
     }
     
     // Set Pedometer Info
-    [cell updateCellWithPedometerData:self.pastPedometers[indexPath.row] withViewMode:self.isDetailMode];
+    [cell updateCellWithPedometerData:self.pastPedometers[indexPath.row] withViewMode:self.viewMode];
     
     // Set Cell Color
     if(indexPath.row % 2 == 0)
@@ -181,13 +188,16 @@ static NSString * const detailCellID = @"DetailFitnessCell";
 #pragma mark Fitness View Mode
 
 - (void)switchViewMode {
-    if (self.isDetailMode) {
-        self.isDetailMode = NO;
-        [self setNavigationLogoImage:@"nav_logo.png"];
-    } else {
-        self.isDetailMode = YES;
+    if ([self.viewMode isEqualToString:@"List"]) {
+        self.viewMode = @"Detail";
         [self setNavigationLogoImage:@"nav_logo_open.png"];
+    } else {
+        self.viewMode = @"List";
+        [self setNavigationLogoImage:@"nav_logo.png"];
     }
+    
+    // Save selected View Mode into NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] setValue:self.viewMode forKey:@"selectedViewMode"];
     
     [self setCollectionMode];
 }
@@ -195,7 +205,7 @@ static NSString * const detailCellID = @"DetailFitnessCell";
 - (void)setCollectionMode {
     UINib *fitnessCellNib;
     
-    if (!self.isDetailMode) {
+    if ([self.viewMode isEqualToString:@"List"]) {
         fitnessCellNib = [UINib nibWithNibName:@"ListFitnessCell" bundle:nil];
         [self.collectionView registerNib:fitnessCellNib forCellWithReuseIdentifier:listCellID];
         [self.collectionView reloadData];
@@ -213,9 +223,9 @@ static NSString * const detailCellID = @"DetailFitnessCell";
             flowLayout.minimumLineSpacing = 0.0f;
             flowLayout.minimumInteritemSpacing = 0.0f;
             flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
-        } completion:^(BOOL finished) {
             
+        } completion:^(BOOL finished) {
+            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
         }];
     } else {
         fitnessCellNib = [UINib nibWithNibName:@"DetailFitnessCell" bundle:nil];
@@ -234,9 +244,9 @@ static NSString * const detailCellID = @"DetailFitnessCell";
             flowLayout.minimumLineSpacing = 0.0f;
             flowLayout.minimumInteritemSpacing = 0.0f;
             flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
-        } completion:^(BOOL finished) {
             
+        } completion:^(BOOL finished) {
+            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
         }];
     }
 }
@@ -331,7 +341,13 @@ static NSString * const detailCellID = @"DetailFitnessCell";
 
    return [formatter stringFromDate:currentDate];
 }
-   
 
+- (void)setCurrentMetric {
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"selectedMetric"] isEqualToString:@"Miles"]) {
+        [self.metricLabel setText:@"mi"];
+    } else {
+        [self.metricLabel setText:@"km"];
+    }
+}
 
 @end

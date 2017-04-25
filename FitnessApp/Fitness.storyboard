@@ -69,7 +69,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zrg-GW-BmZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="108.5" height="39"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHI-gM-Fyd">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHI-gM-Fyd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="108.5" height="39"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="33"/>
                                                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,7 +116,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W54-qh-EeO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="108" height="64"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnD-is-qXu">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnD-is-qXu">
                                                                         <rect key="frame" x="0.0" y="0.0" width="108" height="64"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="54"/>
                                                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -161,24 +161,24 @@
                                                         <rect key="frame" x="216.5" y="0.0" width="108.5" height="39"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="exh-Ia-psu">
-                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="39"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="39"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.85" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGL-yv-zCE">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="39"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGL-yv-zCE">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="39"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="33"/>
                                                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="90" id="Czg-0E-epZ"/>
+                                                                    <constraint firstAttribute="width" constant="80" id="Czg-0E-epZ"/>
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="w2w-rh-9mu">
-                                                                <rect key="frame" x="90" y="0.0" width="18.5" height="39"/>
+                                                                <rect key="frame" x="80" y="0.0" width="28.5" height="39"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOq-vj-8yZ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="18.5" height="39"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="28.5" height="39"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -256,6 +256,7 @@
                         <outlet property="currentDateLabel" destination="fLI-pr-MPK" id="j6Z-i9-zAK"/>
                         <outlet property="distanceLabel" destination="ZGL-yv-zCE" id="Qek-aV-HOn"/>
                         <outlet property="floorLabel" destination="gnD-is-qXu" id="r6W-E7-gZt"/>
+                        <outlet property="metricLabel" destination="DOq-vj-8yZ" id="Y5n-BB-0xp"/>
                         <outlet property="stepsLabel" destination="sHI-gM-Fyd" id="q2X-vt-5Zb"/>
                         <segue destination="IlS-dN-wZs" kind="show" identifier="detailSegue" id="s2V-uG-jCs"/>
                     </connections>
