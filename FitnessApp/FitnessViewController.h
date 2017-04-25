@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FitnessViewController : UICollectionViewController
+@interface FitnessViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout, UITabBarControllerDelegate>
 
 @end

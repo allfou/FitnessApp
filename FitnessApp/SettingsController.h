@@ -1,5 +1,5 @@
 //
-//  DetailViewCell.h
+//  SettingsController.h
 //  FitnessApp
 //
 //  Created by Fouad Allaoui on 4/24/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewCell : UICollectionViewCell
+@interface SettingsController : UIViewController
 
 @end

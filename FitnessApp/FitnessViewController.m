@@ -7,92 +7,236 @@
 //
 
 #import "FitnessViewController.h"
+#import "PedometerData.h"
+#import "FitnessCell.h"
+#import "Theme.h"
+
+@interface UIViewController (PRScrollToTop)
+
+- (void)scrollToTop;
+
+@end
 
 @interface FitnessViewController ()
+
+@property (nonatomic) UIRefreshControl *refreshControl;
+@property UIBarButtonItem *switchViewModeButton;
+@property (nonatomic) NSArray *pedometers;
+@property UIImageView *logo;
+@property BOOL isDetailMode;
+@property BOOL isRefreshing;
 
 @end
 
 @implementation FitnessViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const listCellID = @"listCell";
+static NSString * const detailCellID = @"detailCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // Init Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPedometerList:) name:@"refreshPedometerMessageEvent" object:nil];
     
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    // Used for double tap on tabbar items
+    self.tabBarController.delegate = self;
     
-    // Do any additional setup after loading the view.
+    // Init Navigation Bar (Logo)
+    self.logo = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"nav_logo.png"]];
+    [self.logo setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchViewMode)];
+    [singleTap setNumberOfTapsRequired:1];
+    [self.logo addGestureRecognizer:singleTap];
+    self.tabBarController.navigationItem.titleView = self.logo;
+    
+    // Init Refresh Control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.tintColor = refreshControllerColor;
+    [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
+    self.isRefreshing = NO;
+    
+    // Init CollectionView
+    self.isDetailMode = NO; // Set List Mode by default
+    [self setCollectionMode];
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0); // unhide last cell from tabbar
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    // Bug with refreshcontrol being position above cells
+    [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
 }
-*/
 
-#pragma mark <UICollectionViewDataSource>
+// ************************************************************************************************************
+
+#pragma mark Notifications
+
+- (void)refreshPedometerList:(NSNotification*)notification {
+    self.pedometers = [notification object];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+}
+
+// ************************************************************************************************************
+
+#pragma mark CollectionView DataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+    return [self.pedometers count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    // Configure the cell
+    FitnessCell *cell;
+    
+    if (self.isDetailMode) {
+        cell = (FitnessCell*) [collectionView dequeueReusableCellWithReuseIdentifier:detailCellID forIndexPath:indexPath];
+    } else {
+        cell = (FitnessCell*) [collectionView dequeueReusableCellWithReuseIdentifier:listCellID forIndexPath:indexPath];
+    }
+    
+    if (!cell) {
+        cell = [[FitnessCell alloc]init];
+    }
+    
+    // Set Pedometer Info
+    [cell updateCellWithPedometerData:self.pedometers[indexPath.row] withViewMode:self.isDetailMode];
     
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+// ************************************************************************************************************
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
+#pragma mark CollectionView Delegate
 
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"detailSegue" sender:self];
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
+// ************************************************************************************************************
+
+#pragma mark Fitness View Mode
+
+- (void)switchViewMode {
+    if (self.isDetailMode) {
+        self.isDetailMode = NO;
+        [self setNavigationLogoImage:@"nav_logo.png"];
+    } else {
+        self.isDetailMode = YES;
+        [self setNavigationLogoImage:@"nav_logo_open.png"];
+    }
+    
+    [self setCollectionMode];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
+- (void)setCollectionMode {
+    UINib *fitnessCellNib;
+    
+    if (!self.isDetailMode) {
+        fitnessCellNib = [UINib nibWithNibName:@"ListFitnessCell" bundle:nil];
+        [self.collectionView registerNib:fitnessCellNib forCellWithReuseIdentifier:listCellID];
+        [self.collectionView reloadData];
+        
+        __block UICollectionViewFlowLayout *flowLayout;
+        
+        [self.collectionView performBatchUpdates:^{
+            float width;
+            CGSize mElementSize;
+            [self.collectionView.collectionViewLayout invalidateLayout];
+            width = self.collectionView.frame.size.width / 1;
+            mElementSize = CGSizeMake(width, 155);
+            flowLayout = [[UICollectionViewFlowLayout alloc] init];
+            [flowLayout setItemSize:mElementSize];
+            flowLayout.minimumLineSpacing = 10.0f;
+            flowLayout.minimumInteritemSpacing = 0.0f;
+            flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
+        } completion:^(BOOL finished) {
+            
+        }];
+    } else {
+        fitnessCellNib = [UINib nibWithNibName:@"DetailFitnessCell" bundle:nil];
+        [self.collectionView registerNib:fitnessCellNib forCellWithReuseIdentifier:detailCellID];
+        [self.collectionView reloadData];
+        
+        __block UICollectionViewFlowLayout *flowLayout;
+        [self.collectionView performBatchUpdates:^{
+            float width;
+            CGSize mElementSize;
+            [self.collectionView.collectionViewLayout invalidateLayout];
+            width = self.collectionView.frame.size.width / 1;
+            mElementSize = CGSizeMake(width, 270);
+            flowLayout = [[UICollectionViewFlowLayout alloc] init];
+            [flowLayout setItemSize:mElementSize];
+            flowLayout.minimumLineSpacing = 0.0f;
+            flowLayout.minimumInteritemSpacing = 0.0f;
+            flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
-*/
+
+
+//*****************************************************************************************************************************************
+
+#pragma mark - Refresh Control
+
+- (void)pullToRefresh {
+    // Improve refresh UI effect
+    double delayInSeconds = 0.5f;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.refreshControl endRefreshing];
+    });
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.isRefreshing = NO;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self containingScrollViewDidEndDragging:scrollView];
+    
+    if (self.isRefreshing) {
+        // Init Data here
+    }
+}
+
+- (void)containingScrollViewDidEndDragging:(UIScrollView *)containingScrollView {
+    CGFloat minOffsetToTriggerRefresh = 130.0f;
+    if (!self.isRefreshing && (containingScrollView.contentOffset.y <= -minOffsetToTriggerRefresh)) {
+        self.isRefreshing = YES;
+    }
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self containingScrollViewDidEndDragging:scrollView];
+}
+
+//*****************************************************************************************************************************************
+
+- (void)setNavigationLogoImage:(NSString*)imageName {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.logo.image = [UIImage imageNamed:imageName];
+    });
+}
+
 
 @end
