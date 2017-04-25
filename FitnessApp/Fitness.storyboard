@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Steps-->
         <scene sceneID="fGU-O7-pwO">
             <objects>
                 <collectionViewController id="GgB-xg-eqs" customClass="FitnessViewController" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                             <outlet property="delegate" destination="GgB-xg-eqs" id="dDR-pW-3F9"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Home" id="p4J-96-KWc"/>
+                    <tabBarItem key="tabBarItem" title="Steps" image="steps" id="p4J-96-KWc"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="IlS-dN-wZs" kind="show" identifier="detailVC" id="YID-Kw-VHC"/>
@@ -58,4 +58,7 @@
             <point key="canvasLocation" x="902" y="163"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="steps" width="25" height="25"/>
+    </resources>
 </document>
