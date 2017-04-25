@@ -21,7 +21,6 @@
 		F52BD4E01EAEB190001A8276 /* DetailFitnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52BD4DF1EAEB190001A8276 /* DetailFitnessCell.xib */; };
 		F59FAC151EAECF300094D3A9 /* PedometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC141EAECF300094D3A9 /* PedometerService.m */; };
 		F59FAC181EAECF5D0094D3A9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59FAC171EAECF5D0094D3A9 /* CoreMotion.framework */; };
-		F59FAC1E1EAED3130094D3A9 /* FitnessAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC1D1EAED3130094D3A9 /* FitnessAPI.m */; };
 		F59FAC221EAED88F0094D3A9 /* FitnessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC211EAED88F0094D3A9 /* FitnessCell.m */; };
 		F59FAC2C1EAEEA430094D3A9 /* FitnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC2B1EAEEA430094D3A9 /* FitnessViewController.m */; };
 		F59FAC5D1EAF0A580094D3A9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC5C1EAF0A580094D3A9 /* SettingsViewController.m */; };
@@ -68,8 +67,6 @@
 		F59FAC131EAECF300094D3A9 /* PedometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PedometerService.h; sourceTree = "<group>"; };
 		F59FAC141EAECF300094D3A9 /* PedometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PedometerService.m; sourceTree = "<group>"; };
 		F59FAC171EAECF5D0094D3A9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		F59FAC1C1EAED3130094D3A9 /* FitnessAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FitnessAPI.h; sourceTree = "<group>"; };
-		F59FAC1D1EAED3130094D3A9 /* FitnessAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FitnessAPI.m; sourceTree = "<group>"; };
 		F59FAC1F1EAED82E0094D3A9 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		F59FAC201EAED88F0094D3A9 /* FitnessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FitnessCell.h; sourceTree = "<group>"; };
 		F59FAC211EAED88F0094D3A9 /* FitnessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FitnessCell.m; sourceTree = "<group>"; };
@@ -183,8 +180,6 @@
 			children = (
 				F59FAC131EAECF300094D3A9 /* PedometerService.h */,
 				F59FAC141EAECF300094D3A9 /* PedometerService.m */,
-				F59FAC1C1EAED3130094D3A9 /* FitnessAPI.h */,
-				F59FAC1D1EAED3130094D3A9 /* FitnessAPI.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -382,7 +377,6 @@
 				F59FAC151EAECF300094D3A9 /* PedometerService.m in Sources */,
 				F59FAC5D1EAF0A580094D3A9 /* SettingsViewController.m in Sources */,
 				F59FAC221EAED88F0094D3A9 /* FitnessCell.m in Sources */,
-				F59FAC1E1EAED3130094D3A9 /* FitnessAPI.m in Sources */,
 				F52BD4DB1EAEB138001A8276 /* DetailViewController.m in Sources */,
 				F59FAC2C1EAEEA430094D3A9 /* FitnessViewController.m in Sources */,
 			);

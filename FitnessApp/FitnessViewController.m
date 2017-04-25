@@ -33,7 +33,7 @@
 
 // Data
 @property (nonatomic) CMPedometerData *currentPedometer;
-@property (nonatomic) NSArray *pedometers;
+@property (nonatomic) NSArray *pastPedometers;
 @property BOOL isDetailMode;
 @property BOOL isRefreshing;
 
@@ -78,8 +78,11 @@ static NSString * const detailCellID = @"detailCell";
     // Init Current Date Label
     [self.currentDateLabel setText:[NSString stringWithFormat:@"Today, %@", [self getCurrentTime]]];
     
-    // Init Location Service
+    // Init Current Pedometer Data
     [[PedometerService sharedManager]startTracking];
+    
+    // Init Past Pedometer Data
+    [[PedometerService sharedManager]getPastPedometerDataSince:9];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,7 +112,7 @@ static NSString * const detailCellID = @"detailCell";
 }
 
 - (void)refreshPastPedometerData:(NSNotification*)notification {
-    self.pedometers = [notification object];
+    self.pastPedometers = [notification object];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
@@ -125,7 +128,7 @@ static NSString * const detailCellID = @"detailCell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.pedometers count];
+    return [self.pastPedometers count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -143,7 +146,7 @@ static NSString * const detailCellID = @"detailCell";
     }
     
     // Set Pedometer Info
-    [cell updateCellWithPedometerData:self.pedometers[indexPath.row] withViewMode:self.isDetailMode];
+    [cell updateCellWithPedometerData:self.pastPedometers[indexPath.row] withViewMode:self.isDetailMode];
     
     return cell;
 }

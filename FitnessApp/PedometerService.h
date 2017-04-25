@@ -15,6 +15,6 @@
 
 - (void)startTracking;
 
-- (CMPedometerData*)getPedometerDataForDate:(NSDate*)date;
+- (void)getPastPedometerDataSince:(int)days;
 
 @end

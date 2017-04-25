@@ -18,6 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="484" height="155"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
+            <color key="backgroundColor" red="0.16290694622823987" green="0.31841846201271223" blue="0.47791085025380708" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <size key="customSize" width="50" height="192"/>
             <point key="canvasLocation" x="78" y="27"/>
         </collectionViewCell>
