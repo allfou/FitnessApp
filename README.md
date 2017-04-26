@@ -4,7 +4,7 @@ A simple fitness app to track your daily steps.
 
 * Uses Apple CoreMotion and CMPedometer
 
-<h4>List of the last 10 days of steps data:</h4>
+<h4>List of the last 10 days of pedometer data:</h4>
 <p align="center"><img width="338" height="600" src="Images/FitnessApp_1.PNG?raw=true"></p><br><br>
 <h4>Detailed pedometer view for a given day:</h4>
 <p align="center"><img width="338" height="600" src="Images/FitnessApp_3.PNG?raw=true"></p><br><br>
