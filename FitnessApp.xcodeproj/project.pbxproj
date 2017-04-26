@@ -27,6 +27,11 @@
 		F59FAC641EAFA1C50094D3A9 /* MetricsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC631EAFA1C50094D3A9 /* MetricsViewController.m */; };
 		F59FAC661EAFA23D0094D3A9 /* DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = F59FAC651EAFA23D0094D3A9 /* DefaultPreferences.plist */; };
 		F59FAC691EAFA7290094D3A9 /* ViewModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC681EAFA7290094D3A9 /* ViewModeViewController.m */; };
+		F59FAC781EAFE7170094D3A9 /* BEMAverageLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC6F1EAFE7170094D3A9 /* BEMAverageLine.m */; };
+		F59FAC791EAFE7170094D3A9 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC711EAFE7170094D3A9 /* BEMCircle.m */; };
+		F59FAC7A1EAFE7170094D3A9 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC731EAFE7170094D3A9 /* BEMLine.m */; };
+		F59FAC7B1EAFE7170094D3A9 /* BEMPermanentPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC751EAFE7170094D3A9 /* BEMPermanentPopupView.m */; };
+		F59FAC7C1EAFE7170094D3A9 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F59FAC771EAFE7170094D3A9 /* BEMSimpleLineGraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +87,16 @@
 		F59FAC651EAFA23D0094D3A9 /* DefaultPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultPreferences.plist; sourceTree = "<group>"; };
 		F59FAC671EAFA7290094D3A9 /* ViewModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewModeViewController.h; sourceTree = "<group>"; };
 		F59FAC681EAFA7290094D3A9 /* ViewModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewModeViewController.m; sourceTree = "<group>"; };
+		F59FAC6E1EAFE7170094D3A9 /* BEMAverageLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAverageLine.h; sourceTree = "<group>"; };
+		F59FAC6F1EAFE7170094D3A9 /* BEMAverageLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAverageLine.m; sourceTree = "<group>"; };
+		F59FAC701EAFE7170094D3A9 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		F59FAC711EAFE7170094D3A9 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		F59FAC721EAFE7170094D3A9 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		F59FAC731EAFE7170094D3A9 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		F59FAC741EAFE7170094D3A9 /* BEMPermanentPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPermanentPopupView.h; sourceTree = "<group>"; };
+		F59FAC751EAFE7170094D3A9 /* BEMPermanentPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPermanentPopupView.m; sourceTree = "<group>"; };
+		F59FAC761EAFE7170094D3A9 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		F59FAC771EAFE7170094D3A9 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +128,7 @@
 		F52BD48D1EAEAD08001A8276 = {
 			isa = PBXGroup;
 			children = (
+				F59FAC6C1EAFE7170094D3A9 /* Frameworks */,
 				F52BD4981EAEAD08001A8276 /* FitnessApp */,
 				F52BD4B21EAEAD08001A8276 /* FitnessAppTests */,
 				F52BD4BD1EAEAD08001A8276 /* FitnessAppUITests */,
@@ -245,6 +261,31 @@
 				F59FAC171EAECF5D0094D3A9 /* CoreMotion.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F59FAC6C1EAFE7170094D3A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F59FAC6D1EAFE7170094D3A9 /* SimpleLineChart */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		F59FAC6D1EAFE7170094D3A9 /* SimpleLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				F59FAC6E1EAFE7170094D3A9 /* BEMAverageLine.h */,
+				F59FAC6F1EAFE7170094D3A9 /* BEMAverageLine.m */,
+				F59FAC701EAFE7170094D3A9 /* BEMCircle.h */,
+				F59FAC711EAFE7170094D3A9 /* BEMCircle.m */,
+				F59FAC721EAFE7170094D3A9 /* BEMLine.h */,
+				F59FAC731EAFE7170094D3A9 /* BEMLine.m */,
+				F59FAC741EAFE7170094D3A9 /* BEMPermanentPopupView.h */,
+				F59FAC751EAFE7170094D3A9 /* BEMPermanentPopupView.m */,
+				F59FAC761EAFE7170094D3A9 /* BEMSimpleLineGraphView.h */,
+				F59FAC771EAFE7170094D3A9 /* BEMSimpleLineGraphView.m */,
+			);
+			path = SimpleLineChart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,12 +427,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F59FAC7C1EAFE7170094D3A9 /* BEMSimpleLineGraphView.m in Sources */,
+				F59FAC781EAFE7170094D3A9 /* BEMAverageLine.m in Sources */,
+				F59FAC7B1EAFE7170094D3A9 /* BEMPermanentPopupView.m in Sources */,
 				F59FAC691EAFA7290094D3A9 /* ViewModeViewController.m in Sources */,
 				F59FAC641EAFA1C50094D3A9 /* MetricsViewController.m in Sources */,
 				F52BD49E1EAEAD08001A8276 /* AppDelegate.m in Sources */,
+				F59FAC791EAFE7170094D3A9 /* BEMCircle.m in Sources */,
 				F52BD49B1EAEAD08001A8276 /* main.m in Sources */,
 				F59FAC151EAECF300094D3A9 /* PedometerService.m in Sources */,
 				F59FAC5D1EAF0A580094D3A9 /* SettingsViewController.m in Sources */,
+				F59FAC7A1EAFE7170094D3A9 /* BEMLine.m in Sources */,
 				F59FAC221EAED88F0094D3A9 /* FitnessCell.m in Sources */,
 				F52BD4DB1EAEB138001A8276 /* DetailViewController.m in Sources */,
 				F59FAC2C1EAEEA430094D3A9 /* FitnessViewController.m in Sources */,

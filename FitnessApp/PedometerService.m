@@ -40,6 +40,10 @@
     return self;
 }
 
+// ************************************************************************************************************
+
+#pragma mark - Public Methods
+
 - (void)startTracking {
     [self.pedometer startPedometerUpdatesFromDate:[self getDateFromMidnightForDate:[NSDate date]] withHandler:^(CMPedometerData *_Nullable pedometerData, NSError *_Nullable error) {
         NSLog(@"PedometerData = %@", pedometerData);
@@ -69,6 +73,30 @@
     });
 }
 
+- (void)getPedometerDataForday:(NSDate*)day {
+    [self.pastPedometer removeAllObjects];
+    
+    dispatch_group_t group = dispatch_group_create();
+    for (int i = 0; i < 24; i++) {
+        dispatch_group_enter(group);
+        
+        [self.pedometer queryPedometerDataFromDate:[self dateForHour:i+1 forDate:day] toDate:[self dateForHour:i forDate:day] withHandler:^(CMPedometerData * _Nullable pedometerData, NSError * _Nullable error) {
+            [self.pastPedometer addObject:pedometerData];
+            
+            dispatch_group_leave(group);
+        }];
+    }
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        // Post Refresh Notification to Detail View Controller
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshPedometerDataMessageEvent" object:[self.pastPedometer copy]];
+    });
+}
+
+// ************************************************************************************************************
+
+#pragma mark - Utils
+
 - (nullable NSDate *)getDateFromMidnightForDate:(NSDate*)date {
     NSCalendar *calendar = NSCalendar.currentCalendar;
     NSCalendarUnit preservedComponents = (NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay);
@@ -86,6 +114,10 @@
     [components setDay:-daysAgo];
     
     return [cal dateByAddingComponents:components toDate:today options:0];
+}
+
+- (NSDate*)dateForHour:(int)hour forDate:(NSDate*)date {
+    return [date dateByAddingTimeInterval:-((60*60)*hour)];
 }
 
 @end

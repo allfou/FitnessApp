@@ -9,6 +9,7 @@
 #import "FitnessViewController.h"
 #import "PedometerService.h"
 #import "FitnessCell.h"
+#import "DetailViewController.h"
 #import "Theme.h"
 
 @interface UIViewController (PRScrollToTop)
@@ -125,7 +126,7 @@ static NSString * const detailCellID = @"DetailFitnessCell";
         [self.currentDateLabel setText:[NSString stringWithFormat:@"Today, %@", [self getCurrentTime]]];
         [self.stepsLabel setText:[NSString stringWithFormat:@"%@", self.currentPedometer.numberOfSteps]];
         [self.floorLabel setText:[NSString stringWithFormat:@"%@", [NSNumber numberWithFloat:([self.currentPedometer.floorsAscended floatValue] + [self.currentPedometer.floorsDescended floatValue])]]];
-        [self.distanceLabel setText:[NSString stringWithFormat:@"%.2f", [self convertMetersToMiles:self.currentPedometer.distance]]];
+        [self.distanceLabel setText:[self convertToSelectedMetric:self.currentPedometer.distance]];
     });
 }
 
@@ -238,7 +239,7 @@ static NSString * const detailCellID = @"DetailFitnessCell";
             CGSize mElementSize;
             [self.collectionView.collectionViewLayout invalidateLayout];
             width = self.collectionView.frame.size.width / 1;
-            mElementSize = CGSizeMake(width, 270);
+            mElementSize = CGSizeMake(width, 224);
             flowLayout = [[UICollectionViewFlowLayout alloc] init];
             [flowLayout setItemSize:mElementSize];
             flowLayout.minimumLineSpacing = 0.0f;
@@ -326,12 +327,34 @@ static NSString * const detailCellID = @"DetailFitnessCell";
                                         animated:YES];
 }
 
+//*****************************************************************************************************************************************
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
+        // Get selected cell row index to get the selected Pedometer day
+        NSArray *myIndexPaths = [self.collectionView indexPathsForSelectedItems];
+        NSIndexPath *indexPath = [myIndexPaths objectAtIndex:0];
+        DetailViewController *vc = segue.destinationViewController;
+        vc.pedometerData = self.pastPedometers[indexPath.row];
+    }
+}
+
 // ****************************************************************************************************************
 
 #pragma mark - Util
 
-- (double)convertMetersToMiles:(NSNumber*)meters {
-    return [meters doubleValue] * 0.000621371192;
+- (NSString*)convertToSelectedMetric:(NSNumber*)value {
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"selectedMetric"] isEqualToString:@"Miles"]) {
+        [self.metricLabel setText:@"mi"];
+        return [NSString stringWithFormat:@"%.2f", [value doubleValue] * 0.000621371192];
+    }
+    
+    // return value in km
+    [self.metricLabel setText:@"km"];
+    return [NSString stringWithFormat:@"%.2f", [value doubleValue] / 1000];
 }
 
 - (NSString*)getCurrentTime {

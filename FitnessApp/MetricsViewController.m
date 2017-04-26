@@ -46,7 +46,7 @@
     
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     
-    // Save selected Category into NSUserDefaults
+    // Save selected Metric into NSUserDefaults
     [[NSUserDefaults standardUserDefaults] setValue:[tableView cellForRowAtIndexPath:indexPath].textLabel.text forKey:@"selectedMetric"];
     
     // Refresh Items list
@@ -60,7 +60,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Pre-select default category from NSUserDefaults
+    // Pre-select default Metric from NSUserDefaults
     if ([self.selectedMetric isEqualToString:cell.textLabel.text]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         self.lastSelectedCell = indexPath;

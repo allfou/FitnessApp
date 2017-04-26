@@ -17,4 +17,6 @@
 
 - (void)getPastPedometerDataSince:(int)days;
 
+- (void)getPedometerDataForday:(NSDate*)day;
+
 @end

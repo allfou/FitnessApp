@@ -34,8 +34,7 @@
     
     // Init default settings from NSUserDefaults
     self.selectedMetric = [[NSUserDefaults standardUserDefaults] stringForKey:@"selectedMetric"];
-    self.selectedViewMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"selectedViewMode"];
-    
+    self.selectedViewMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"selectedViewMode"];    
     self.metricDetail.text = self.selectedMetric;
     self.viewModeDetail.text = self.selectedViewMode;
 }
