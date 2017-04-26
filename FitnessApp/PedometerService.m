@@ -46,7 +46,7 @@
 
 - (void)startTracking {
     [self.pedometer startPedometerUpdatesFromDate:[self getDateFromMidnightForDate:[NSDate date]] withHandler:^(CMPedometerData *_Nullable pedometerData, NSError *_Nullable error) {
-        NSLog(@"PedometerData = %@", pedometerData);
+        //NSLog(@"PedometerData = %@", pedometerData);
         
         // Post Refresh Notification to Fitness View Controller
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCurrentPedometerMessageEvent" object:pedometerData];
